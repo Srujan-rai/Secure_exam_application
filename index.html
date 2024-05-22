@@ -6,7 +6,8 @@
 <title>Tab Change Detection and Copy Alert</title>
 </head>
 <body>
-  <h1>copy the text here</h1>
+<h1>Copy the text here</h1>
+<input type="text" placeholder="Type here" id="textInput">
 
 <script>
 document.addEventListener("visibilitychange", function() {
@@ -22,13 +23,18 @@ document.addEventListener("copy", function(e) {
   e.preventDefault(); // This will prevent the copy action
 });
 
-// Example: Detecting a specific extension by checking if it modifies the DOM
-function checkForExtension() {
+document.addEventListener("paste", function(e) {
+  alert("Pasting is not allowed!!");
+  e.preventDefault(); // This will prevent the paste action
+});
+
+// Example: Detecting the presence of a specific extension (general approach)
+function detectExtension() {
   const testElement = document.createElement('div');
   testElement.id = 'extension-test-element';
   document.body.appendChild(testElement);
 
-  // Example: Check if a specific extension adds a known attribute
+  // Example: Check for specific modifications/extensions attributes
   if (testElement.dataset.extensionDetected) {
     alert("Extension detected!");
   } else {
@@ -38,7 +44,7 @@ function checkForExtension() {
   document.body.removeChild(testElement);
 }
 
-checkForExtension();
+detectExtension();
 </script>
 
 </body>
