@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tab Change Detection and Copy Alert</title>
+</head>
+<body>
+  <h1>copy the text here</h1>
+
+<script>
+document.addEventListener("visibilitychange", function() {
+  if (document.hidden) {
+    alert("Tab changed or page minimized");
+  } else {
+    alert("Tab focused");
+  }
+});
+
+document.addEventListener("copy", function(e) {
+  alert("Copying text is not allowed!");
+  e.preventDefault(); // This will prevent the copy action
+});
+
+// Example: Detecting a specific extension by checking if it modifies the DOM
+function checkForExtension() {
+  const testElement = document.createElement('div');
+  testElement.id = 'extension-test-element';
+  document.body.appendChild(testElement);
+
+  // Example: Check if a specific extension adds a known attribute
+  if (testElement.dataset.extensionDetected) {
+    alert("Extension detected!");
+  } else {
+    alert("No extension detected.");
+  }
+
+  document.body.removeChild(testElement);
+}
+
+checkForExtension();
+</script>
+
+</body>
+</html>
